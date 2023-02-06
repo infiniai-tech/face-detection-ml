@@ -11,7 +11,7 @@ Computer Vision model for Face Detection
 </p>
 
 <pre>
-from cvzone.FaceDetectionModule import FaceDetector
+from infiniai.FaceDetectionModule import FaceDetector
 import cv2
 
 cap = cv2.VideoCapture(0)

@@ -1,30 +1,30 @@
 # face-detection-ml
 Computer Vision model for Face Detection
 
-
-### 60 FPS Face Detection
+###  Face Detection
 
 <hr>
 
 <p align="center">
-  <img width="640" height="360" src="https://www.computervision.zone/wp-content/uploads/2021/05/Face-Detection-2.jpg">
+  <img width="640" height="360" src="https://github.com/infiniai-tech/infiniai/blob/main/Results/facedetection.png">
 </p>
 
 <pre>
 from infiniai.FaceDetectionModule import FaceDetector
 import cv2
+import time
 
 cap = cv2.VideoCapture(0)
-detector = FaceDetector()
-
+pTime = 0
+detector = FaceDetector( )
 while True:
-    success, img = cap.read()
+    success, img = cap.read( )
     img, bboxs = detector.findFaces(img)
-
-    if bboxs:
-        # bboxInfo - "id","bbox","score","center"
-        center = bboxs[0]["center"]
-        cv2.circle(img, center, 5, (255, 0, 255), cv2.FILLED)
+    print(bboxs)
+    cTime = time.time( )
+    fps = 1 / (cTime - pTime)
+    pTime = cTime
+    cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 5, (0, 255, 0), 5)
 
     cv2.imshow("Image", img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
